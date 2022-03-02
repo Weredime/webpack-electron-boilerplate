@@ -18,6 +18,13 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.s?css$/,
+                use: [
+                    "style-loader",
+                    "css-loader"
+                ]
+            },
+            {
                 // required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
                 test: /node_modules\/svelte\/.*\.mjs$/,
                 resolve: {
@@ -29,11 +36,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: "index.html",
-            template: "src/renderer/template.ejs"
+            template: normalize(resolve(__dirname, "template.ejs"))
         })
     ],
     resolve: {
-        extensions: ['.ts'],
+        extensions: ['.js', '.ts', '.jsx', '.tsx', '.svelte'],
     },
     output: {
         filename: "renderer.js",

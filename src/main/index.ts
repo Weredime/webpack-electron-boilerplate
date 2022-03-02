@@ -10,7 +10,11 @@ function createWindow() {
     }
   })
 
-  win.loadFile(app.isPackaged ? "index.html" : "dist/index.html");
+  if (app.isPackaged) {
+    win.loadFile("dist/index.html");
+  } else {
+    win.loadURL("http://localhost:8080/")
+  }
 }
 
 app.whenReady().then(() => {
